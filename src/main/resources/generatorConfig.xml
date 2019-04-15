@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+	PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+	"http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+	<context id="MySqlcontext" targetRuntime="MyBatis3"
+		defaultModelType="flat">
+		<property name="autoDelimitKeywords" value="true"/>
+		<property name="beginningDelimiter" value="`"/>
+		<property name="endingDelimiter" value="`"/>
+		
+		<commentGenerator>
+			<!-- <property name="suppressAllComments" value="true"/> -->
+			<property name="suppressDate" value="true"/>
+			<property name="addRemarkComments" value="true"/>
+		</commentGenerator>
+		
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+						connectionURL="jdbc:mysql://localhost:3306/crm"
+						userId="root"
+						password="123456">
+		</jdbcConnection>
+		
+		<javaTypeResolver>
+		<!-- 默认使用JavaTypeResolverDefaultImpl类.
+		1 精度>0或 长度>18,使用java.math.BigDecimal 
+		2 精度=0或 10<=长度<=18,使用java.lang.Long
+		3 精度=0或 5<=长度<=9,使用java.lang.Integer
+		4 精度=0或 长度<5,使用java.lang.Short
+		如果设置成true,则所有数据库传来的数据(DECIMAL和NUMERIC)类型强制转换成BigDecimal-->
+			<property name="forceBigDecimals" value="false"/>
+		</javaTypeResolver>
+		
+		<javaModelGenerator targetPackage="com.hihihigh.crm.model.autogenerator"
+							targetProject="src\main\java">
+			<property name="trimStrings" value="true"/>
+		</javaModelGenerator>
+		
+		<sqlMapGenerator targetPackage="com.hihihigh.crm.mapper"
+						 targetProject="src\main\resources"/>
+		 
+		<javaClientGenerator type="XMLMAPPER" targetPackage="com.hihihigh.crm.dao"
+		 					  targetProject="src\main\java"/>
+		 
+		<table tableName="%">
+			<generatedKey column="id" sqlStatement="MySql"/>
+		</table>
+	</context>
+</generatorConfiguration>
